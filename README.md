@@ -17,3 +17,26 @@ A Flask web application that lets users search, view, and leave reviews on Leagu
 
 ---
 
+## 🧪 Local Setup
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/YOUR_USERNAME/league-champ-directory.git
+cd league-champ-directory
+
+
+```
+2. Create and activate a virtual environment
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+3. Install dependencies
+```bash
+pip install -r requirements.txt
+
+```
+4. Run the app
+```bash
+flask run
+
