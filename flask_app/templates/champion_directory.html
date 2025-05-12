@@ -1,0 +1,18 @@
+{% extends "header.html" %}
+{% block content %}
+
+<h2 class="champion-header">All Champions</h2>
+
+<div class="results-container">
+  {% for champion in champions %}
+    <a href="{{ url_for('champion_detail', champion_id=champion.id) }}" class="champion-card">
+      <img src="{{ champion.image_url }}" alt="{{ champion.name }}" class="mx-auto w-24 h-24 rounded shadow-md" />
+      <h5 class="mt-2 text-lg font-semibold">
+        {{ champion.name }}
+        <span class="text-gray-600 font-normal"> &middot; {{ champion.title }} </span>
+      </h5>
+    </a>
+  {% endfor %}
+</div>
+
+{% endblock %}

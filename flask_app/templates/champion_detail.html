@@ -1,0 +1,80 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% if champion %}
+<div class="bg-white text-black min-h-screen px-6">
+  <div class="text-center my-6">
+    <h2 class="text-4xl font-extrabold">{{ champion.name }}</h2>
+    <h3 class="text-2xl font-light text-gray-600">{{ champion.title }}</h3>
+
+    <img src="{{ champion.image_url }}" alt="{{ champion.name }}" class="mx-auto mt-4 w-56 h-56 rounded-xl shadow-xl" />
+  </div>
+
+  <div class="champion-box">
+    <p class="text-center text-sm mt-2"><b>Tags:</b> {{ champion.tags | join(', ') }}</p>
+    <p class="italic text-center mt-4">"{{ champion.blurb }}"</p>
+
+    <div class="mt-4 text-sm">
+      {% for label, value in stat_pairs %}
+      <div class="mb-2">
+        <p class="font-semibold">{{ label }}</p>
+        <div class="stat-bar">
+          {% for i in range(10) %}
+            <div class="star {% if i < value %}star-filled{% endif %}"></div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="note-section mt-6 bg-white text-black border border-neutral-300 rounded p-4">
+    <h1 class="note-title">Notes
+      <small class="note-count">{{ notes | length }} note{{ notes|length != 1 and 's' or '' }}</small>
+    </h1>
+    <ul class="note-container">
+      {% for note in notes %}
+      <li class="note">
+        <span class="note-date">{{ note['date'] }}</span>
+        <div class="note-commenter">@{{ note['commenter'] }}</div>
+        <p class="note-content">{{ note['content'] }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="container mx-auto">
+      <form method="POST" action="" class="note-form">
+        {{ form.csrf_token }}
+
+        <div class="form-group note-input">
+          <label class="text-black">{{ form.name.label }}</label>
+          {{ form.name(class="form-title text-black") }}
+          {% if form.name.errors %}
+            <div class="error" role="alert">
+              {% for error in form.name.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group note-input">
+          <label class="text-black">{{ form.text.label }}</label>
+          {{ form.text(class="form-content text-black") }}
+          {% if form.text.errors %}
+            <div class="error" role="alert">
+              {% for error in form.text.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        {{ form.submit(class="note-button") }}
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

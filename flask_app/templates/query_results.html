@@ -1,0 +1,32 @@
+{% extends "header.html" %} 
+{% block content %} 
+
+{% if error_msg %}
+<p class="error-box">{{ error_msg }}</p>
+{% endif %}
+
+{% if results|length == 1 %}
+<div class="flex justify-center items-center p-10">
+  <a href="{{ url_for('champion_detail', champion_id=results[0].id) }}" class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-md text-center w-64">
+    <img src="{{ results[0].image_url }}" alt="{{ results[0].name }}" class="mx-auto w-32 h-32 rounded shadow-md" />
+    <h5 class="mt-2 text-2xl font-semibold text-black">
+      {{ results[0].name }}
+      <span class="text-gray-600 font-normal"> &middot; {{ results[0].title }} </span>
+    </h5>
+  </a>
+</div>
+{% elif results %}
+<div class="results-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+  {% for result in results %}
+    <a href="{{ url_for('champion_detail', champion_id=result.id) }}" class="bg-gray-100 rounded-lg p-4 shadow hover:shadow-md transition w-48 mx-auto text-center">
+      <img src="{{ result.image_url }}" alt="{{ result.name }}" class="mx-auto w-24 h-24 rounded shadow-md" />
+      <h5 class="mt-2 text-lg font-semibold text-black">
+        {{ result.name }}
+        <span class="text-gray-600 font-normal"> &middot; {{ result.title }} </span>
+      </h5>
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
