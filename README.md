@@ -17,24 +17,3 @@ A Flask web application that lets users search, view, and leave reviews on Leagu
 
 ---
 
-## 📂 Project Structure
-
-league-champ-directory/
-├── data/
-│ └── champions.json # Local JSON data for champion info
-├── flask_app/
-│ ├── static/
-│ │ └── source.css # Raw CSS for the entire app
-│ ├── templates/
-│ │ ├── base.html # Base layout
-│ │ ├── header.html # Navigation bar
-│ │ ├── index.html # Search page
-│ │ ├── query_results.html # Search results page
-│ │ └── champion_detail.html # Individual champion profile
-│ ├── init.py # App factory
-│ ├── app.py # Flask routes
-│ ├── model.py # MongoDB interactions
-│ └── forms.py # Flask-WTF forms
-├── .flaskenv # Flask environment variables
-├── requirements.txt # Required Python packages
-└── README.md
